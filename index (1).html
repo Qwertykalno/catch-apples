@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>	</title>
+	<style type="text/css">
+		.sphere {
+			background-image: url('apple.png');
+			background-size: cover;
+			width: 100px;
+			height: 100px;
+			position: absolute;
+			border-radius: 100px;
+			transition: all 2s ease-out;
+			top: -100px;
+		}
+		.ground {
+			background: green;
+			position: absolute;
+			width: 1200px;
+			height: 50px;
+			top:  870px;
+			left: 300px;
+		}
+		.prop {
+			position: absolute;
+			height: 100px;
+			width: 100px;
+			background: blue;
+		}
+	</style>
+</head>
+<body style="background-image: url('Background.png'); background-size: cover;">
+<h1>Набери больше 50 очков чтобы выиграть</h1>
+<h1 class="text">Score:<span class="score">0</span></h1>
+<h1 class="text">Time:<span class="time">10</span></h1>
+
+	
+</div>
+<script type="text/javascript">
+	let firstPart = document.querySelector('.first')
+	let point = 0
+	let score = document.querySelector('.score')
+	let T = 10
+	let time = document.querySelector('.time')
+
+	let createApple = function() {	
+		let sphere = document.createElement('div')
+		document.body.appendChild(sphere)
+		sphere.classList.add('sphere')
+
+	let randomX = Math.round(Math.random()*1000)
+		sphere.style.left = randomX + 'px'
+		let fall = function() {
+			sphere.style.top = 1000+'px';
+		}
+		setTimeout(fall, 1000)
+
+		sphere.onclick = function() {
+		sphere.style.display = 'none'
+		point = point + 10
+		score.innerHTML = point
+		}
+	}
+	let timer = function() {
+			T = T - 1
+			time.innerHTML = T
+
+			if(T==0) {
+				clearInterval(interval1)
+				clearInterval(interval2)
+				if(point>=50){
+					alert('you win!')
+				}else{
+					alert('you lose!')
+				}
+			}
+		}
+
+	interval1 = setInterval(createApple, 1000)
+	interval2 = setInterval(timer, 1000)
+
+</script>
+</body>
+</html>
